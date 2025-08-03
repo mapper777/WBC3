@@ -1,0 +1,77 @@
+[ {
+  "FIO" : "a",
+  "Collection" : "admin",
+  "docs" : [ {
+    "data" : {
+      "extension" : "",
+      "rList" : [ {
+        "lPart" : "id",
+        "rPart" : [ "[a-z]", "+" ]
+      } ]
+    },
+    "rules" : "rule1",
+    "id" : "admin::rule1"
+  }, {
+    "data" : {
+      "extension" : "",
+      "rList" : [ {
+        "lPart" : "id",
+        "rPart" : [ "[0-9]", "[a-z]", "+" ]
+      } ]
+    },
+    "rules" : "rule2",
+    "id" : "admin::rule2"
+  }, {
+    "saving" : "+3",
+    "parser" : "SyntAsSingleFSM",
+    "scanner" : "lexAsTable",
+    "assist" : 1,
+    "deltat" : 0,
+    "language" : "js",
+    "id" : "admin::tune"
+  } ]
+}, {
+  "FIO" : "t",
+  "Collection" : "tester",
+  "docs" : [ {
+    "data" : {
+      "extension" : "",
+      "rList" : [ {
+        "lPart" : "id",
+        "rPart" : [ "[a-z]", "+" ]
+      } ]
+    },
+    "rules" : "rule1",
+    "id" : "tester::rule1"
+  }, {
+    "saving" : "+3",
+    "parser" : "SyntAsSingleFSM",
+    "scanner" : "lexAsTable",
+    "assist" : 1,
+    "deltat" : 0,
+    "language" : "js",
+    "id" : "tester::tune"
+  } ]
+}, {
+  "FIO" : "i",
+  "Collection" : "000000000",
+  "docs" : [ {
+    "data" : {
+      "extension" : "",
+      "rList" : [ {
+        "lPart" : "id",
+        "rPart" : [ "[a-z]", "+" ]
+      } ]
+    },
+    "rules" : "rule1",
+    "id" : "000000000::rule1"
+  }, {
+    "saving" : "+3",
+    "parser" : "SyntAsSingleFSM",
+    "scanner" : "lexAsTable",
+    "assist" : 1,
+    "deltat" : 0,
+    "language" : "js",
+    "id" : "000000000::tune"
+  } ]
+} ]

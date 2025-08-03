@@ -1,0 +1,5 @@
+*~*~~/WBC/*,/WBC/help/*,/WBC/help/images/*,/WBC/css/*,/WBC/js/*,/WBC/work/*,/WBC/users/*
+admin~passwd~a~*
+tester~13Test31~t~/*
+000000000~passwd~i
+424313233~BLbGeuwF~Никишин Е.М.

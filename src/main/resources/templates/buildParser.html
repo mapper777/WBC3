@@ -1,0 +1,735 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>???</title>
+</head>
+<body>
+
+<div align="center" class="bd">Свойства символов грамматики и</div>
+&lt;!&ndash;if (what == 11)&ndash;&gt;
+<div align="center" class="bd">отношение предшествования:</div>
+&lt;!&ndash;else&ndash;&gt;
+<div align=center class=bd>отношение последования:</div>
+<div align=center>
+    <table border=1>
+    <tr>
+        <td colspan=4> <td> &nbsp;<%=i%>&nbsp;
+    <tr>
+    <td>&nbsp;<%=(nd==-1?"EOF":symb.getName().replaceAll("<","&lt;").replaceAll(">","&gt;"))%>&nbsp;
+    <td>&nbsp;<%=rx%>&nbsp;
+    <td>&nbsp;<%=k%>&nbsp;
+    <td>&nbsp;<%=i%>&nbsp;
+    <td>&nbsp;<%=(((what==12)&&(i == j)) ? "*" : (ntr == null ? "" : (ntr.indexOf(symb) < 0 ? "" : "*")))
+    <tr>
+        <td colspan=2 align=right><i><%=rez%>
+        </i>&nbsp;
+        <td>&nbsp;<%=symbSet.indexOf(symb)%>&nbsp;
+        <td>&nbsp;
+        <td colspan=<%=cntS%>><%=val%><%
+
+    </table></div>
+<p>&nbsp;
+<div class=df style='cursor:pointer' onclick='{if((ob_=document.getElementById("ob")).style.display=="none"){ob_.style.display="block";document.getElementById("sh").innerText="скрыть";}else{ob_.style.display="none";document.getElementById("sh").innerText="показать";}}'>Обозначения (щелкните здесь, чтобы <span id=sh>скрыть</span>):</div>
+<table id='ob' class=tb>
+    <tr class=tb>
+        <td class=tb>&nbsp;<td class=tb>Первая колонка содержит имя символа грамматики
+    <tr class=tb>
+        <td class=tb>&nbsp;<td class=tb>Вторая колонка содержит его тип:
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;N&nbsp;<td class=tb>Нетерминал (его свойства далее маленькими буквами)
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;s&nbsp;<td class=tb> - стартовый
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;a&nbsp;<td class=tb> - аннулируемый
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;l&nbsp;<td class=tb> - леворекурсивный
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;r&nbsp;<td class=tb> - праворекурсивный
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;c&nbsp;<td class=tb> - просто рекурсивный
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;i&nbsp;<td class=tb> - косвенно (лево - после l, право - после r, просто - после c) рекурсивный
+    <tr class=tb>
+        <td align=right class=tb>EOF&nbsp;<td class=tb>End of File
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;T&nbsp;<td class=tb>Терминал (имя группы слов)
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;W&nbsp;<td class=tb>Слово (конкретная строка)
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;<i>&lt;action&gt;</i>&nbsp;<td class=tb>Действие
+    <tr class=tb>
+        <td align=right class=tb>&nbsp;<i>&lt;eps&gt;</i>&nbsp;<td class=tb>Ничего (пустая цепочка символов)
+    <tr class=tb>
+        <td class=tb>&nbsp;<td class=tb>Третья колонка содержит код символа (токен), используемый вместо этого символа в программе синтаксического акцептора/анализатора.
+    <tr class=tb>
+        <td class=tb>&nbsp;<td class=tb>Четвертая колонка содержит порядковый номер строки таблицы для установления соответствия строк со столбцами (не заполнена для действий и пустой цепочки).
+</table>
+
+<div align=center class=bd>Грамматика <%=(grammar.testLL1() ? "" : "<span style='color:red'>НЕ</span> ")%>принадлежит классу LL(1)</div>
+<div align=center class=df>Множества выбора правил:</div>
+<div align=center><table border=1 class=tb>
+    <tr>
+        <td>&nbsp;Правило&nbsp;<td colspan=<%=ii%>>&nbsp;Множество выбора:&nbsp;
+    <tr <%if(flag){%>class='lgr'<%}%>>
+    <td>&nbsp;<b><%=curSymb.getName()%></b>:&nbsp;<%
+    <td<%=rx%>><%if(nd==-3){%><i><%}%>&nbsp;<%=val%>&nbsp;<%if(nd==-3){%></i><%}%><%
+</table></div><%if(!grammar.testLL1()){%>
+<p>&nbsp;
+<div class=df style='cursor:pointer' onclick='{var ob1;if((ob1=document.getElementById("ob1")).style.display=="none"){ob1.style.display="block";document.getElementById("sh").innerText="скрыть";}else{ob1.style.display="none";document.getElementById("sh").innerText="показать";}}'>
+    Обозначения (щелкните здесь, чтобы <span id=sh>скрыть</span>):</div>
+<table id='ob1' class=tb>
+    <tr class=tb>
+        <td class=tb>&nbsp;<td class=tb>1. Правила с пересекающимися множествами выбора,
+    <tr class=tb>
+        <td class=tb>&nbsp;<td class=tb>&nbsp;&nbsp;имеющие одинаковые нетерминалы в левых частях, выделены серым фоном
+    <tr class=tb>
+        <td class=tb>&nbsp;<td class=tb>2. Символы, входящие в пересечение множеств выбора, выделены красным цветом
+</table>
+<div align=center class=bd>Грамматика <%=(flag ? "" : "НЕ ")%>принадлежит классу LL(1)</div><%
+if(flag){
+cntA-=1;%>
+<div align='center'><table border='1' class='tb'>
+    <tr >
+        <td>&nbsp;
+        <td>&nbsp;EOF&nbsp;
+        <td<%=(symb.getType()==-3?" class='di'":"")%>>&nbsp;<%=symb.getName()%>&nbsp;<%
+        <td class='lgr'>&nbsp;A<%=i-cntS%>&nbsp;<%}
+    <tr>
+        <td valign=top<%=(i>=cntS?" class='lgr'":"")%>
+            <table class='tb'>
+                <tr class=tb>
+                    <td colspan=2 class=tb><span class='df'><%=up%></span>
+                <tr class=tb>
+                <td  class=tb valign=top rowspan=<%=curRule.getLength()%>><span class='df'><%=dn%></span>&nbsp;<%
+                <tr class=tb>
+                <td class=tb <%=(nd==-3?" class='di'":"")%>>
+                <%=(nd>0?"<b>":"")%>
+                <%=curSymb.getName()%>
+                <%=(nd>0?"</b>":"")%><%
+                <td class='lgr'>&nbsp;A<%=nd-cntS%><%
+                    &nbsp;<span style='color:red'>Stop</span>&nbsp;<%}else{%>&nbsp;<span class='df'><%=up%><%=(i < cntS ? rg : ex)%></span>&nbsp;
+            </table></div>
+<div>&nbsp;</div>
+<div class='bd'>&nbsp;Расшифровка имен действий:</div>
+<table border=1 class='tb'>
+    <tr class='bd'>
+        <td>&nbsp;Имя действия&nbsp;
+        <td>&nbsp;Текст действия&nbsp;
+            <%
+            for (i = cntS; i < cntA; i++)
+            if ((symb = symbSet.getSymbol(i)).getType() == 0) {%>
+    <tr>
+        <td align=right class='lgr'>&nbsp;A<%=(i-cntS)%>&nbsp;
+        <td>&nbsp;<%=symb.getName()%>&nbsp;
+            <%
+            }
+            %></table>
+<p>&nbsp;
+<div class='df' style='cursor:pointer' onclick='{if((ob_=document.getElementById("ob")).style.display=="none"){ob_.style.display="block";document.getElementById("sh").innerText="скрыть";}else{ob_.style.display="none";document.getElementById("sh").innerText="показать";}}'>
+    Обозначения (щелкните здесь, чтобы <span id=sh>скрыть</span>):
+    <table id='ob' border=0 class=tb>
+        <tr class=tb>
+            <td class=tb>&nbsp;<%=up%>&nbsp;<td class=tb>Снять верхний символ со стека
+        <tr class=tb>
+            <td class=tb>&nbsp;<%=dn%>&nbsp;<td class=tb>Поместить в стек цепочку символов, находящуюся в клетке справа от символа ! (верхний символ цепочки становится верхним символом стека)
+        <tr class=tb>
+            <td class=tb>&nbsp;<%=rg%>&nbsp;<td class=tb>Прочитать следующий терминал со входа
+            <%if (actions > 0) {%>
+        <tr class=tb>
+            <td class=tb>&nbsp;<%=ex%>&nbsp;<td class=tb>Выполнить действие, именем которого озаглавлена строка
+            <%}%>
+        <tr class=tb>
+            <td class=tb>&nbsp;<span style='color:red'>Stop</span>&nbsp;<td class=tb>Останов по окончанию восстановления дерева разбора правильного предложения
+        <tr class=tb>
+            <td class=tb>&nbsp;Пустая клетка&nbsp;<td class=tb>Останов по ошибке
+    </table></div>
+<div align=center class=bd>Грамматика <%=(flag ? "" : "<span style='color:red'>НЕ</span> ")%>принадлежит классу LL(1)</div><%
+if(flag){%>
+<div align=center><table border=1 class=tb>
+    <tr>
+        <td>&nbsp;N сост.&nbsp;
+        <td>&nbsp;flag_A&nbsp;
+        <td>&nbsp;flag_S&nbsp;
+        <td>&nbsp;flag_R&nbsp;
+        <td>&nbsp;flag_E&nbsp;
+        <td>&nbsp;Переход&nbsp;
+        <td>&nbsp;Множество выбора&nbsp;
+        <td>&nbsp;Действие&nbsp;
+    <tr>
+        <td align=right><%=k%> <%=symb.getName()%>&nbsp;
+        <td>&nbsp;
+        <td>&nbsp;
+        <td>&nbsp;
+        <td align=center>&nbsp;
+    <td align=right>
+    <td>
+    <td>&nbsp;
+    <tr>
+        <td align=right><%=k%> <%=symb.getName()%>&nbsp;
+        <td align=center><%=(((ii<-1)&&(ii>-4))?"1":" ")%>
+        <td align=center>
+            <%=((ii>0)?((curRule.getSymbol(kk+1)!=null)?"1":" "):" ")%>
+        <td align=center><%=(((ii<=0)&&((curRule.getSymbol(kk+1))==null))?"1":" ")%>
+        <td>&nbsp;
+        <td align=right><%=nd%>&nbsp;
+        <td>&nbsp;
+        <td>&nbsp;<%=((ii==0)?curSymb.getName():"")%><%
+            kk+=1;k+=1;
+            }
+            j+=1;//k+=1;
+            }
+            }%></table></div>
+<div align=center class=bd><%=val%></div>
+<div align=center class=dfm>Серым фоном отмечены клетки, в которых не удалось предупредить
+    конфликты.
+</div>
+<div align=center class=dfm>Черный <span class='lgr'>цвет</span> на сером фоне означает, что
+    конфликт "сдвиг/свертка" условно разрешен в пользу операции сдвига.
+</div><%
+if(kk>3){
+%>
+<div align=center class=dfm>Синий <span class='bl'>цвет</span> на сером фоне означает, что
+    конфликт "свертка/свертка" фактически не разрешен,
+</div>
+<div align=center class=dfm>хотя в клетке осталась только одна (случайно выбранная) операция
+    свертки.
+</div><%
+}
+}
+%>
+<div>&nbsp;</div>
+<div align=center class=bd>Управляющая LR-таблица:</div>
+<div align=center class=dfm>Всплывающая подсказка в непустых клетках означает &lt;номер
+    строки&gt;:&lt;номер столбца&gt;</div>
+<div align="center"><table border=1>
+    <tr>
+        <td>&nbsp;
+            for(i=0;i<symbSet.getSize();i++){
+            if(((nd=(symb=symbSet.getSymbol(i)).getType())!=0)&&(nd>-4)){
+            val=symb.getName().replaceAll("<","&lt;");
+            rez="";
+            if(nd>0)rez=" class='bd'";
+            else if(nd==-1)val="EOF";
+            else if(nd==-3)rez=" style='font-style:italic;color:green'";%>
+        <td<%=rez%>>&nbsp;<%=val%>&nbsp;<%
+        }
+        }
+        %>
+    <tr>
+        <td>&nbsp;
+    <td>&nbsp;<%=j%>&nbsp;<%
+        j+=1;
+        }
+        for(i=0;i<lrT.length;i++){%>
+    <tr>
+        <td>&nbsp;<%=i%>&nbsp;            <%
+            for(j=0;j<lrT[i].length;j++){
+            if((rab=lrT[i][j])==null)rab="";
+            k=0;
+            for(nd=0;nd<rab.length();nd++){
+            if(rab.charAt(nd)=='S')k|=1;
+            if(rab.charAt(nd)=='R')if(k<2)k|=2;else k=7;
+            if(k>=3)break;
+            }
+            if(rab.length()>0){
+            rab+="&nbsp";
+            ttl=" title='"+i+":"+j+"'";
+            }else
+            ttl="";
+            %>
+        <td<%=(k>=3?(k==3?" class='lgr'":" class='bl'"):"")%><%=ttl%>>&nbsp;<%=rab%>&nbsp;<%
+        }
+        }
+        vct = grammar.getActions();
+        if ((vct != null) && ((nd = vct.size()) > 0)) {
+        %></table></div>
+<div>&nbsp;</div>
+<div align=center class=bd>&nbsp;Расшифровка имен действий:</div>
+<table border=1 class=tb align=center>
+    <tr class=bd>
+        <td>&nbsp;Имя действия&nbsp;
+        <td>&nbsp;Текст действия&nbsp;
+            <%
+            for (i = 0; i < nd; i++) {%>
+    <tr>
+        <td align=right>&nbsp;A<%=i%>&nbsp;
+        <td>&nbsp;<%=vct.get(i).toString()%>&nbsp;
+            <%
+            }
+            %></table>
+<div align=center class=bd>Таблица расширенных конфигураций:</div>
+<div align=center class=dfm>(Серым фоном выделены базовые конфигурации состояния)
+</div>
+<div align=center><table border=1>
+    <tr>
+        <td>&nbsp;Состояние&nbsp;
+        <td>&nbsp;Переход&nbsp;
+        <td>&nbsp;ОПК&nbsp;
+        <td>&nbsp;Маркированное правило&nbsp;<%
+            for(i=0;i<vct.size();i++){
+            ntr=(ArrayList)vct.get(i);%>
+    <tr>
+        <td valign=top rowspan=<%=ntr.size()+1%>>&nbsp;<%=i%>&nbsp;<%
+            for(j=0;j<ntr.size();j++){
+            if((mr=(MarkedRule)ntr.get(j))!=null){curRule=mr.getRule();nd=mr.getStateTo();%>
+    <tr>
+        <td align=right><%=(nd>=0?"&nbsp;"+nd:"")%>&nbsp;
+        <td>&nbsp;<%
+            if(((rSelS=mr.getContext())!=null)&&(rSelS.size()>0)){
+            for(k=0;k<rSelS.size();k++){rab="";
+            if((symb=(Symbol)rSelS.get(k))!=null)rab=symb.getName().replaceAll("<","&lt;");
+            if(rab.length()==0)rab="EOF";%><%=rab%>&nbsp;<%
+            }
+            }
+            %>
+        <td <%if((j==0)|(mr.getType()==0)){%>class=lgr<%}%>>
+        &nbsp;<%=(curRule==null?"":((symb=curRule.getLeftPart())==null?"&lt;Text&gt;":symb.getName().replaceAll("<","&lt;")))%>&nbsp;:&nbsp;<%
+        nd=mr.getMarkerIndex();
+        for(k=0;k<curRule.getLength();k++){
+        if(k==nd){%><b>^</b>&nbsp;<%
+        }
+        if((symb=curRule.getSymbol(k))!=null){%><%=symb.getName().replaceAll("<","&lt;")%>&nbsp;<%
+        }
+        }
+        if(k<=nd){%><b>^</b>&nbsp;<%}
+        }
+        }
+        }%></table></div>
+<div align=center class=bd>Таблица канонических конфигураций:</div>
+<div align=center class=dfm>(Серым фоном выделены базовые конфигурации состояния)</div>
+<div align=center><table border=1 align=center>
+    <tr>
+        <td>&nbsp;Состояние&nbsp;
+        <td>&nbsp;Переход&nbsp;
+        <td>&nbsp;ОПК&nbsp;
+        <td>&nbsp;Маркированное правило&nbsp;<%
+            for(i=0;i<vct.size();i++){
+            ntr=(ArrayList)vct.get(i);%>
+    <tr>
+        <td valign=top rowspan=<%=ntr.size()+1%>>&nbsp;<%=i%>&nbsp;<%
+            for(j=0;j<ntr.size();j++){
+            if((mr=(MarkedRule)ntr.get(j))!=null){curRule=mr.getRule();nd=mr.getStateTo();
+            rab="";
+            if(((rSelS=mr.getContext())!=null)&&(rSelS.size()>0)){
+            if((symb=(Symbol)rSelS.get(0))!=null)rab=symb.getName().replaceAll("<","&lt;");
+            if(rab.length()==0)rab="EOF";
+            }
+            %>
+    <tr>
+        <td align=right><%=(nd>=0?"&nbsp;"+nd:"")%>&nbsp;
+        <td>&nbsp;<%=rab%>&nbsp;
+        <td <%if(mr.getType()!=1){%>class=lgr<%}%>>&nbsp;<%=(curRule==null?"":((symb=curRule.getLeftPart())==null?"&lt;Text&gt;":symb.getName().replaceAll("<","&lt;")))%>&nbsp;:&nbsp;<%
+        nd=mr.getMarkerIndex();
+        for(k=0;k<curRule.getLength();k++){
+        if(k==nd){%><b>^</b>&nbsp;<%
+        }
+        if((symb=curRule.getSymbol(k))!=null){%>
+        <%=symb.getName().replaceAll("<","&lt;")%>&nbsp;<%
+        }
+        }
+        if(k<=nd){%><b>^</b>&nbsp<%}
+        }
+        }
+        }%></table></div>
+<table class="tbc">
+    <tr class="tb">
+        <td class="tb" style='color:blue;' align="right">Входные символы:&nbsp;
+        <td class="tb" style='color:blue' colspan=<%=nd%>>Управляющая таблица:
+    <tr class="tb">
+        <td valign=top class="tb">
+    <tr class="tb">
+        <td class="tb">&nbsp;<%
+            int cols=ctInd.getCols();String cls="",celS="";
+            for (k = 0; k < cols; k++) {%><td>&nbsp;<b><%=k%></b>&nbsp;<%}%><%
+        for(k = 0; k < nd; k++) {%><tr class="tb"><td class="tb" align="right">[&nbsp;<%
+    String rng=ctInd.getAllRanges(k);
+    if(rng==null)
+    rng="EOF";
+    else{
+    rng=rng.replaceAll(" "," \\\\d32").replaceAll("\t"," \\\\d09").replaceAll("\r"," \\\\d10").replaceAll("\n"," \\\\d13");
+    }
+    %><%=rng%>&nbsp;]&nbsp;<%
+    for(i=0;i<cols;i++){
+    cls="";
+    int celI=ctInd.getCell(k,i);
+    //    int celI=ctInd.getStateTo(i,k);
+    if(celI==0){
+    cls="er";
+    celS="E";
+    }else if(celI<0){
+    if((celI&0x40000000)==0){
+    cls="fn";
+    celS=""+(celI|0x40000000);
+    }else{
+    cls="fv";
+    celS=""+celI;
+    }
+    }else
+    celS=""+celI;%><td class="<%=cls%>" align="right">&nbsp;<%=celS%>&nbsp;<%}
+    }
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>???</title>
+</head>
+<body>
+
+<div align="center" class="bd">Свойства символов грамматики и</div>
+<div align="center" class="bd">отношение предшествования:</div>
+<div align="center" class="bd">отношение последования:</div>
+
+<div align="center">
+    <table border="1">
+        <tr>
+            <td colspan="4"></td>
+            <td>&nbsp;</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right"><i></i>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan=""></td>
+        </tr>
+    </table>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="df" style="cursor:pointer"
+     onclick="if ((ob_ = document.getElementById('ob')).style.display == 'none') { ob_.style.display = 'block'; document.getElementById('sh').innerText = 'скрыть'; } else { ob_.style.display = 'none'; document.getElementById('sh').innerText = 'показать'; }">
+    Обозначения (щелкните здесь, чтобы <span id="sh">скрыть</span>):
+</div>
+<table id="ob" class="tb">
+    <tr class="tb">
+        <td class="tb">&nbsp;</td>
+        <td class="tb">Первая колонка содержит имя символа грамматики</td>
+    </tr>
+    <tr class="tb">
+        <td class="tb">&nbsp;</td>
+        <td class="tb">Вторая колонка содержит его тип:</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;N&nbsp;</td>
+        <td class="tb">Нетерминал (его свойства далее маленькими буквами)</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;s&nbsp;</td>
+        <td class="tb">– стартовый</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;a&nbsp;</td>
+        <td class="tb">– аннулируемый</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;l&nbsp;</td>
+        <td class="tb">– леворекурсивный</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;r&nbsp;</td>
+        <td class="tb">– праворекурсивный</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;c&nbsp;</td>
+        <td class="tb">– просто рекурсивный</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;i&nbsp;</td>
+        <td class="tb">– косвенно (лево – после l, право – после r, просто – после c) рекурсивный</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">EOF&nbsp;</td>
+        <td class="tb">End of File</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;T&nbsp;</td>
+        <td class="tb">Терминал (имя группы слов)</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;W&nbsp;</td>
+        <td class="tb">Слово (конкретная строка)</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;<i>&lt;action&gt;</i>&nbsp;</td>
+        <td class="tb">Действие</td>
+    </tr>
+    <tr class="tb">
+        <td align="right" class="tb">&nbsp;<i>&lt;eps&gt;</i>&nbsp;</td>
+        <td class="tb">Ничего (пустая цепочка символов)</td>
+    </tr>
+    <tr class="tb">
+        <td class="tb">&nbsp;</td>
+        <td class="tb">Третья колонка содержит код символа (токен), используемый вместо этого символа в программе синтаксического акцептора/анализатора.</td>
+    </tr>
+    <tr class="tb">
+        <td class="tb">&nbsp;</td>
+        <td class="tb">Четвертая колонка содержит порядковый номер строки таблицы для установления соответствия строк со столбцами (не заполнена для действий и пустой цепочки).</td>
+    </tr>
+</table>
+
+<div align="center" class="bd">Грамматика принадлежит классу LL(1)</div>
+<div align="center" class="df">Множества выбора правил:</div>
+<div align="center">
+    <table border="1" class="tb">
+        <tr>
+            <td>&nbsp;Правило&nbsp;</td>
+            <td colspan="">&nbsp;Множество выбора:&nbsp;</td>
+        </tr>
+        <tr class="lgr">
+            <td>&nbsp;<b>ИмяНет</b>:&nbsp;</td>
+            <td>&nbsp;<i>VAL</i>&nbsp;</td>
+        </tr>
+    </table>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="df" style="cursor:pointer"
+     onclick="var ob1; if ((ob1 = document.getElementById('ob1')).style.display == 'none') { ob1.style.display = 'block'; document.getElementById('sh').innerText = 'скрыть'; } else { ob1.style.display = 'none'; document.getElementById('sh').innerText = 'показать'; }">
+    Обозначения (щелкните здесь, чтобы <span id="sh">скрыть</span>):
+</div>
+<table id="ob1" class="tb">
+    <tr class="tb">
+        <td class="tb">&nbsp;</td>
+        <td class="tb">1. Правила с пересекающимися множествами выбора, имеющие одинаковые нетерминалы в левых частях, выделены серым фоном</td>
+    </tr>
+    <tr class="tb">
+        <td class="tb">&nbsp;</td>
+        <td class="tb">2. Символы, входящие в пересечение множеств выбора, выделены красным цветом</td>
+    </tr>
+</table>
+
+<div align="center" class="bd">Грамматика принадлежит классу LL(1)</div>
+
+<div align="center">
+    <table border="1" class="tb">
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;EOF&nbsp;</td>
+            <td>&nbsp;ИмяСимвола&nbsp;</td>
+            <td> A&nbsp;</td>
+        </tr>
+        <tr>
+            <td valign="top">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;ИмяСимвола&nbsp;</td>
+            <td>&nbsp;<span style="color:red">Stop</span>&nbsp;</td>
+        </tr>
+    </table>
+</div>
+
+<div>&nbsp;</div>
+
+<div class="bd">&nbsp;Расшифровка имен действий:</div>
+<table border="1" class="tb">
+    <tr class="bd">
+        <td>&nbsp;Имя действия&nbsp;</td>
+        <td>&nbsp;Текст действия&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="right" class="lgr">&nbsp;A0&nbsp;</td>
+        <td>&nbsp;Описание действия0&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="right" class="lgr">&nbsp;A1&nbsp;</td>
+        <td>&nbsp;Описание действия1&nbsp;</td>
+    </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<div class="df" style="cursor:pointer"
+     onclick="if ((ob_ = document.getElementById('ob')).style.display == 'none') { ob_.style.display = 'block'; document.getElementById('sh').innerText = 'скрыть'; } else { ob_.style.display = 'none'; document.getElementById('sh').innerText = 'показать'; }">
+    Обозначения (щелкните здесь, чтобы <span id="sh">скрыть</span>):
+    <table id="ob" border="0" class="tb">
+        <tr class="tb">
+            <td class="tb">&nbsp;</td>
+            <td class="tb">Снять верхний символ со стека</td>
+        </tr>
+        <tr class="tb">
+            <td class="tb">&nbsp;</td>
+            <td class="tb">Поместить в стек цепочку символов, находящуюся в клетке справа от символа ! (верхний символ цепочки становится верхним символом стека)</td>
+        </tr>
+        <tr class="tb">
+            <td class="tb">&nbsp;</td>
+            <td class="tb">Прочитать следующий терминал со входа</td>
+        </tr>
+        <tr class="tb">
+            <td class="tb">&nbsp;</td>
+            <td class="tb">Выполнить действие, именем которого озаглавлена строка</td>
+        </tr>
+        <tr class="tb">
+            <td class="tb"><span style="color:red">Stop</span></td>
+            <td class="tb">Останов по окончанию восстановления дерева разбора правильного предложения</td>
+        </tr>
+        <tr class="tb">
+            <td class="tb">Пустая клетка</td>
+            <td class="tb">Останов по ошибке</td>
+        </tr>
+    </table>
+</div>
+
+<div align="center" class="bd">Грамматика принадлежит классу LL(1)</div>
+
+<div align="center">
+    <table border="1" class="tb">
+        <tr>
+            <td>&nbsp;N сост.&nbsp;</td>
+            <td>&nbsp;flag_A&nbsp;</td>
+            <td>&nbsp;flag_S&nbsp;</td>
+            <td>&nbsp;flag_R&nbsp;</td>
+            <td>&nbsp;flag_E&nbsp;</td>
+            <td>&nbsp;Переход&nbsp;</td>
+            <td>&nbsp;Множество выбора&nbsp;</td>
+            <td>&nbsp;Действие&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="right">&nbsp;K&nbsp;ИмяСимвола&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="right">&nbsp;Переход&nbsp;</td>
+            <td>&nbsp;Множество выбора&nbsp;</td>
+            <td>&nbsp;ИмяСимвола&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="right">&nbsp;K&nbsp;ИмяСимвола&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right">&nbsp;ND&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</div>
+
+<div align="center" class="bd">Грамматика относится к классу LR(1)</div>
+
+<div align="center" class="dfm">Серым фоном отмечены клетки, в которых не удалось предупредить конфликты.</div>
+<div align="center" class="dfm">Черный <span class="lgr">цвет</span> на сером фоне означает, что конфликт "сдвиг/свертка" условно разрешен в пользу операции сдвига.</div>
+<div align="center" class="dfm">Синий <span class="bl">цвет</span> на сером фоне означает, что конфликт "свертка/свертка" фактически не разрешен, хотя в клетке осталась только одна (случайно выбранная) операция свертки.</div>
+
+<div>&nbsp;</div>
+<div align="center" class="bd">Управляющая LR-таблица:</div>
+<div align="center" class="dfm">Всплывающая подсказка в непустых клетках означает &lt;номер строки&gt;:&lt;номер столбца&gt;</div>
+<div align="center">
+    <table border="1">
+        <tr>
+            <td>&nbsp;</td>
+            <td class="bd">&nbsp;ИмяСимвола1&nbsp;</td>
+            <td class="bd">&nbsp;ИмяСимвола2&nbsp;</td>
+            <td style="font-style:italic;color:green">&nbsp;ИмяΕ&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;0&nbsp;</td>
+            <td>&nbsp;1&nbsp;</td>
+            <td>&nbsp;2&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;0&nbsp;</td>
+            <td class="lgr" title="0:0">&nbsp;S1 &nbsp;</td>
+            <td class="bl" title="0:1">&nbsp;R2 &nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</div>
+
+<div>&nbsp;</div>
+<div align="center" class="bd">&nbsp;Расшифровка имен действий:</div>
+<table border="1" class="tb" align="center">
+    <tr class="bd">
+        <td>&nbsp;Имя действия&nbsp;</td>
+        <td>&nbsp;Текст действия&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="right">&nbsp;A0&nbsp;</td>
+        <td>&nbsp;Описание действия0&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="right">&nbsp;A1&nbsp;</td>
+        <td>&nbsp;Описание действия1&nbsp;</td>
+    </tr>
+</table>
+
+<div align="center" class="bd">Таблица расширенных конфигураций:</div>
+<div align="center" class="dfm">(Серым фоном выделены базовые конфигурации состояния)</div>
+<div align="center">
+    <table border="1">
+        <tr>
+            <td>&nbsp;Состояние&nbsp;</td>
+            <td>&nbsp;Переход&nbsp;</td>
+            <td>&nbsp;ОПК&nbsp;</td>
+            <td>&nbsp;Маркированное правило&nbsp;</td>
+        </tr>
+        <tr>
+            <td valign="top" rowspan="">&nbsp;0&nbsp;</td>
+        <tr>
+            <td align="right">&nbsp;ND&nbsp;</td>
+            <td>&nbsp;RAB&nbsp;</td>
+            <td class="lgr">&nbsp;ИмяНет: Символ1 Символ2&nbsp;</td>
+        </tr>
+        </tr>
+    </table>
+</div>
+
+<div align="center" class="bd">Таблица канонических конфигураций:</div>
+<div align="center" class="dfm">(Серым фоном выделены базовые конфигурации состояния)</div>
+<div align="center">
+    <table border="1" align="center">
+        <tr>
+            <td>&nbsp;Состояние&nbsp;</td>
+            <td>&nbsp;Переход&nbsp;</td>
+            <td>&nbsp;ОПК&nbsp;</td>
+            <td>&nbsp;Маркированное правило&nbsp;</td>
+        </tr>
+        <tr>
+            <td valign="top" rowspan="">&nbsp;0&nbsp;</td>
+        <tr>
+            <td align="right">&nbsp;ND&nbsp;</td>
+            <td>&nbsp;RAB&nbsp;</td>
+            <td class="lgr">&nbsp;ИмяНет: Символ1 Символ2&nbsp;</td>
+        </tr>
+        </tr>
+    </table>
+</div>
+
+<table class="tbc">
+    <tr class="tb">
+        <td class="tb" style="color:blue;" align="right">Входные символы:&nbsp;</td>
+        <td class="tb" style="color:blue" colspan="">&nbsp;Управляющая таблица:</td>
+    </tr>
+    <tr class="tb">
+        <td valign="top" class="tb"></td>
+    </tr>
+    <tr class="tb">
+        <td class="tb">&nbsp;</td>
+        <td>&nbsp;<b>0&nbsp;</b>&nbsp;</td>
+        <td>&nbsp;<b>1&nbsp;</b>&nbsp;</td>
+        <td>&nbsp;<b>2&nbsp;</b>&nbsp;</td>
+    </tr>
+    <tr class="tb">
+        <td class="tb" align="right">[&nbsp;RNG&nbsp;]&nbsp;</td>
+        <td class="tb" align="right">&nbsp;E&nbsp;</td>
+        <td class="fn" align="right">&nbsp;5&nbsp;</td>
+        <td class="fv" align="right">&nbsp;-3&nbsp;</td>
+    </tr>
+</table>
+
+</body>
+</html>

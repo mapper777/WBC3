@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <title>Test translator</title>
+    <style>
+        textarea {resize:both;width:90%;height:40%;}
+    </style>
+    <script type="text/javascript">
+        var parser;
+        function scrText(){
+            TextReader.setText(inpTxt.value);
+            try {
+                tracer.clear();
+            } catch (e) {;}
+            if(!(typeof parser == 'object'))
+                parser = new Parser(TextReader);
+            var b = document.getElementById("stepsB").value;
+            b = +b;
+            var e = document.getElementById("stepsE").value;
+            e = +e;
+            while((b + e) > 200){
+                if(b > 10)
+                    b -= 10;
+                if(e > 10)
+                    e -= 10;
+            }
+            document.getElementById("pRez").innerText = parser.parse(b, e);
+            document.getElementById("lCnt").innerText = parser.getInfo(0);
+            document.getElementById("cCnt").innerText = parser.getInfo(1);
+            if(document.getElementById("showW").checked){
+                var innT = parser.getInfo(2);
+                var rezT = innT.join(" ");
+                rez.innerText = "Прочитанные лексемы: " + rezT;
+            } else
+                rez.innerText = "";
+            if(document.getElementById("showH").checked && ((b + e) > 0)){
+                var t = "";
+                var h = parser.getInfo(3);
+                if(h.length > 0){
+                    for(var i = 0; i <h.length; i++){
+                        var item = h[i];
+                        t += "<tr>";
+                        for(var j = 0; j < item.length; j++)
+                            t += "<td>&nbsp;" + item[j] + "&nbsp;";
+                    }
+                    h = null;
+                    hist.innerHTML = t;
+                    document.getElementById("history").style.display = "block";
+                }
+            }else{
+                document.getElementById("history").style.display = "none";
+                hist.innerHTML = "<tr><td>";
+            }
+            try{
+                document.getElementById("trace").innerText = tracer.getAll();
+                if(document.getElementById("trace").innerText.trim() != "")
+                    document.getElementById("traceShow").style.display = "block";
+                else
+                    document.getElementById("traceShow").style.display = "none";
+            } catch(e) {;}
+        };
+        onload = function()
+        {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+//    script.src = 'users<%=request.getParameter("src")%>';
+            script.src="users/12345678translator.txt"
+            document.head.appendChild(script);
+            inpTxt.style.visibility="visible";
+            tst.style.display="block";
+            rez.style.visibility="visible";
+            rez.value = (typeof parser);
+            tst.addEventListener('click', scrText, false);
+        };
+    </script>
+</head>
+<body>
+<div align = center>Сканер: <span id="lexName"></span></div>
+<div align = center>Парсер: <span id="syntName"></span></div>
+<div align=center><textarea id=inpTxt rows=20 cols=60 class=bd style='visibility:hidden'></textarea></div>
+<div align=center><input type=button id = 'tst' align=center class='bd' value='Проверить текст'></div>
+<div align = center><input id='showW' type='checkbox'>Показывать лексемы ({токен,'слово'})
+    <input id='showH' type='checkbox' onclick = 'if(this.checked){document.getElementById("stepsB").value = "50";document.getElementById("stepsE").value = "50"}'>Показывать историю разбора, шаги {0 :
+    <input id = 'stepsB' type='text' size = '2'>} и {последний -
+    <input id = 'stepsE' type='text' size = '2'> : последний}</div>
+<div align = center>
+    <table border = '1' style='border-collapse:collapse;'>
+        <tr><td align = 'right' style='width:20em'>Результат:&nbsp;<td id = 'pRez' style='width:6em'>
+        <tr><td align = 'right' >Шагов лексического анализатора:&nbsp;<td id = 'lCnt'>
+        <tr><td align = 'right' >Шагов синтаксического анализатора:&nbsp;<td id = 'cCnt'>
+    </table>
+</div>
+<div id = 'rez'></div>
+<div id = 'history' style = 'display:none'><hr>История разбора:
+    <table id = 'hist' border = '1' style='border-collapse:collapse;'>
+        <tr><td>&nbsp;
+    </table></div>
+<div id = 'traceShow' style='display:none'><hr>Результат выполнения действий:
+    <div id = 'trace'></div></div>
+</body>
+</html>

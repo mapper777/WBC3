@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div align="center">
+    <div th:if="${error}">
+        <div>Your login/password for:</div>
+        <div><i th:text="${path}"></i></div>
+        <div>are invalid, try again:</div>
+    </div>
+    <form method="POST" th:action="@{/auth/login}">
+        <input type="text" name="login" placeholder="Login" autofocus><br/>
+        <input type="password" name="pass" placeholder="Password"><br/>
+        <input type="submit" value="Login" />
+    </form>
+</div>
+</body>
+</html>

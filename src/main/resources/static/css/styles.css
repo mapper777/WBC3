@@ -1,0 +1,61 @@
+/* 
+    Created on : 05.02.2021, 12:30:26
+    Author     : O.K.Vaylam
+*/
+html, body {
+    font-family: Calibri, Tahoma, Helvetica, Arial, sans-serif;
+}
+.no {text-decoration:line-through}
+.abs {position: absolute}
+.div {position:absolute; border:solid; border-color:lightgray;overflow:auto;}
+.divb {position:absolute; border:solid; border-color:blue;background-color:white;opacity:1}
+.hid {position:absolute; display:none}
+.bubble {background-color: #f8f8f8;cursor: pointer}
+.coll {font-weight: bold; font-style: italic}
+.vertAT {vertical-align:top}
+
+.rgt {text-align:right}
+.grSpan {color:green}
+.grSpanNoMargin {color:green;margin-left:-2px}
+.grBoldSpan {color:green;font-weight:bold}
+.grSp {color:lightgray}
+.magSpan {color:darkmagenta;font-weight:bold}
+.redSpan {color:red}
+.blSpan {color:blue}
+.brSpan {color:mediumblue}
+.boldSpan {font-weight:bold}
+.normSpan {color:black}
+.startNTSpan {font-weight: bold;text-decoration: underline}
+.noMargin {color:darkmagenta;margin-left:-2px;font-weight: bold}
+.errBGr {border-color:red; border-width:2px}
+
+span {margin-left:2px; margin-right:2px}
+table {border-collapse:collapse; border-width:1px;margin-left:2px; margin-right:2px}
+tr, td {border-style: solid;border-width: 1px}
+.my-class {color: red; text-decoration: line-through;}
+textarea {resize:both;width:98%;height:100%;}
+div {margin-left:2px; margin-right:2px}
+.circle {width:16px;height:16px;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius: 8px;background:black;margin-left:auto;margin-right:auto}
+
+.df {cursor: default;border-style: none;}
+.dfm {cursor: default;font-size: 11}
+.bd {font-weight: bold;cursor: default}
+.tb {border-collapse: collapse;border-style:none;margin-left:5px;margin-right:5px;cursor: default}
+.tbinv {border-collapse: collapse;border-style:none;margin-left:5px;margin-right:5px;cursor: default;visibility:hidden}
+.tbc {border-collapse: collapse;border-style:none;margin-left:auto;margin-right:auto;cursor: default}
+.gr {background-color:gray;cursor: default}
+.lgr {background-color:lavender;cursor: default}
+.bl {background-color:gray;color: blue;cursor: default}
+.ye {background-color:yellow;cursor: default}
+.di {font-size:large;font-style: italic;color: green;cursor: default}
+.dr {color: red;cursor: default}
+.fn {color:magenta;font-size:large;font-weight:bold}
+.er {color:red;font-size:large;font-weight:bold;font-style:italic}
+.fv {background-color:black;color:magenta;font-size:large;font-weight:bold}
+.fb {font-size:large;}
+.blnk {animation-name: blnk;animation-duration: 2s;animation-iteration-count: infinite; /* Параметры анимации */}
+@keyframes blnk {
+  from { opacity: 1; /* Непрозрачный текст */ }
+  to { opacity: 0; /* Прозрачный текст */ }
+}
+

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Builder of Compilers</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <script src="/js/grammar.js"></script>
+    <script src="/js/ruleParse.js"></script>
+    <script th:inline="javascript">
+        window._INIT = {
+            wUser: /*[[${initData.wUser}]]*/,
+            jobs: /*[[${initData.jobs}]]*/ [],
+            rulesList: /*[[${initData.rulesList}]]*/,
+            dTime: /*[[${initData.dTime}]]*/,
+            tplName: /*[[${initData.tplName}]]*/,
+            saveNN: /*[[${initData.saveNN}]]*/ false,
+            autoS: /*[[${initData.autoS}]]*/ "0",
+            helP: /*[[${initData.helP}]]*/ "0",
+            prefix: ""
+        };
+    </script>
+    <script src="/js/main.js" defer></script>
+    <script th:inline="javascript">
+        try {
+            _G = new Grammar();
+        } catch (e) {
+            window.location = "about:blank";
+        }
+    </script>
+</head>
+<body>
+
+
+<div id="rules" class="div" style="visibility:hidden">
+    <div align="center">Правила:</div>
+    <table id="tblRules" style="width:99.5%;margin-left:4px">
+        <tr>
+            <td id="vidR" style="width:50%;cursor:pointer" onclick="colHide()">&nbsp;Видимые/редактируемые</td>
+            <td id="factR" style="width:50%;cursor:pointer" onclick="colHide()">&nbsp;Фактические</td>
+        </tr>
+        <tr>
+            <td class="vertAT">
+                <table id="rls" class="vertAT">
+                    <tr>
+                        <td onclick="rulesSort()"><span>Левая часть</span></td>
+                        <td onclick="actionsS_H()"><span>Правая часть</span></td>
+                    </tr>
+                    <tr>
+                        <td class="rgt"><span>&nbsp;</span></td>
+                        <td><span>&nbsp;</span></td>
+                    </tr>
+                </table>
+            </td>
+            <td class="vertAT">
+                <table id="rNorm">
+                    <tr>
+                        <td><span>Левая часть</span></td>
+                        <td><span>Правая часть</span></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="mnu" class='div'>
+    <div align='center' onmouseover="vJob(true)" onmouseout="vJob(false)">
+        <span id="asUser" style='text-decoration:underline;text-align:center;' th:text="${initData.getWUser()}">&nbspUser</span>
+    </div>
+    <div align="center" onmouseover="showTime(true)" onmouseout='showTime(false)'>
+        <table class="tbc" style="background-color:#040404">
+            <tr>
+                <td>
+                    <div id="flame3" class="circle">&nbsp;</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="flame2" class="circle">&nbsp;</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="flame1" class="circle">&nbsp;</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="font-size:xx-small">&nbsp;</div>
+    <div id="opn" th:classappend="${#strings.isEmpty(initData.rulesList)} ? ' grSp'"> Открыть </div>
+<div id='rSave' class="grSp">Сохранить как:</div>
+<div><input id='rName' type='text' size="11"/></div>
+<div id="rDel">Удалить</div>
+<div id="bUild">Построить</div>
+<div id="rUn" class="grSp">Запустить</div>
+<div id="tSt" class="grSp">Проверить</div>
+<div id="vieW" class="grSp">Показать</div>
+<div class="grSp"><span id="dwn">Скачать</span><a id="dwnL" class="hid"
+                                                  th:href="@{'/file?filename=' + ${initData.wUser} + 'translator.txt'}">Скачать</a>&nbsp;
+</div>
+<div id="rClr">Очистить</div>
+<div id="tUne">Настроить</div>
+<div id="hElp">Помочь</div>
+<div id='goOut'>Выйти</div>
+</div>
+
+<div id="ext" class="div">
+    <span>&nbsp;Расширение для действий в правилах:</span>
+    <textarea id="extT" style="width:99%;margin-left:4px"></textarea>
+</div>
+
+<div id='cntxt' class='hid'>
+    <table id='cMnu' class='bubble'>
+        <tr itemprop='d'>
+            <td>
+                <span>Вырезать</span>
+            </td>
+        </tr>
+        <tr itemprop='c'>
+            <td>
+                <span>Копировать</span>
+            </td>
+        </tr>
+        <tr itemprop='i'>
+            <td>
+                <span>Вставить</span><!-- <tr itemprop='a'><td><span>Добавить строку</span> -->
+            </td>
+        </tr>
+        <tr itemprop='a'>
+            <td>
+                <span>Добавить строку</span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="opR" class="hid">
+    <table id="opRules" class="bubble" th:utext="${initData.rulesList}"></table>
+</div>
+
+<div id="forV" class="hid">
+    <table id="vCase" class="bubble">
+        <tr what="0">
+            <td>&nbsp;Код транслятора&nbsp;</td>
+        </tr>
+        <tr what="1">
+            <td>&nbsp;Сканер, управляемый таблицей&nbsp;</td>
+        </tr>
+        <tr what="2">
+            <td>&nbsp;Сканер, управляемый графом&nbsp;</td>
+        </tr>
+        <tr what="9">
+            <td>&nbsp;Правила грамматики&nbsp;</td>
+        </tr>
+        <tr what="11">
+            <td>&nbsp;Множества предшественников&nbsp;</td>
+        </tr>
+        <tr what="12">
+            <td>&nbsp;Множества последователей&nbsp;</td>
+        </tr>
+        <tr what="13">
+            <td>&nbsp;Множества выбора правил&nbsp;</td>
+        </tr>
+        <tr what="14">
+            <td>&nbsp;Нисходящий парсер с одним состоянием&nbsp;</td>
+        </tr>
+        <tr what="15">
+            <td>&nbsp;Нисходящий парсер с несколькими состояниями&nbsp;</td>
+        </tr>
+        <tr what="16">
+            <td>&nbsp;Восходящий парсер&nbsp;</td>
+        </tr>
+        <tr what="17">
+            <td>&nbsp;Расширенные конфигурации&nbsp;</td>
+        </tr>
+        <tr what="18">
+            <td>&nbsp;Канонические конфигурации&nbsp;</td>
+        </tr>
+    </table>
+</div>
+
+<div id="tunE" class="div" style="display:none">
+    <div style="margin-left:10px" >
+
+        <div th:object="${initData}">
+        <p>Инструментальный язык программирования транслятора:</p>
+        <table class="tb">
+            <tr th:each="opt,iterStat : *{languages}" class="tb">
+                <td class="tb"
+                    th:attr="tList=${opt}"
+                    th:onclick="|langChng()|">
+                    <input type="radio"
+                           name="lang"
+                           th:id="${'L_' + (iterStat.index+1)}"
+                           th:value="${opt.id}"
+                           th:checked="${opt.selected}"
+                           th:disabled="${opt.disabled}"/>
+                    <label th:for="${'L_' + (iterStat.index+1)}"
+                           th:text="${opt.label}">Label</label>
+                </td>
+            </tr>
+        </table>
+        </div>
+
+        <div th:object="${initData}">
+            <p>Вариант построения сканера:</p>
+            <table class="tb">
+                <tr class="tb" th:each="opt,iterStat : *{scanners}" >
+                    <td class="tb"
+                            th:attr="tList=${opt}"
+                            th:onclick="|tplChng()|">
+                        <input type="radio"
+                               th:field="*{scanner}"
+                               th:value="${opt.id}"
+                               th:id="${'s_' + (iterStat.index+1)}"/>
+                        <label th:for="${'s_' + (iterStat.index+1)}"
+                               th:text="${opt.label}">Label</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div th:object="${initData}">
+            <p>Вариант построения парсера:</p>
+            <table class="tb">
+                <tr class="tb" th:each="opt,iterStat : *{parsers}" >
+                    <td class="tb"
+                            th:attr="tList=${opt}"
+                            th:onclick="|tplChng()|">
+                        <input type="radio"
+                               th:field="*{parser}"
+                               th:value="${opt.id}"
+                               th:id="${'p_' + (iterStat.index+1)}"/>
+                        <label th:for="${'p_' + (iterStat.index+1)}"
+                               th:text="${opt.label}">Label</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </table>
+
+        <p>Автосохранение системы правил:</p>
+        <table class="tb">
+            <tr class="tb">
+                <td class="tb">
+                    <input type="checkbox"
+                           id="saveNN"
+                           th:checked="${initData.saveNN}"/>
+                    <label for="saveNN">
+                        Разрешить автосохранение безымянной системы правил
+                    </label>
+                </td>
+            </tr>
+            <tr class="tb" th:each="val : ${#numbers.sequence(0,4)}">
+                <td class="tb"
+                    th:switch="${val}">
+                    <input type="radio"
+                           name="asav"
+                           th:id="${'autoS' + val}"
+                           th:value="${val}"
+                           th:checked="${initData.autoS == val}"/>
+                    <label th:case="1">Сохранять перед построением сканера и парсера</label>
+                    <label th:case="2">Сохранять при выходе</label>
+                    <label th:case="3">Сохранять за 2 мин. до окончания сессии</label>
+                    <label th:case="4">Сохранять при любом изменении</label>
+                    <label th:case="0">Не выполнять автосохранение</label>
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <strong>Длительность интервала времени показа сообщения (ms):</strong>
+            <input type="text"
+                   id="deltaT"
+                   size="4"
+                   th:value="${initData.dTime}"/>
+        </p>
+
+        <p><strong>Открывать справку:</strong></p>
+        <table class="tb">
+            <tr class="tb">
+                <td class="tb">
+                    <input type="radio"
+                           name="hlp"
+                           id="hlp1"
+                           value="1"
+                           th:checked="${initData.helP == '1'}"/>
+                    <label for="hlp1">
+                        в правой панели основного окна
+                    </label>
+                </td>
+            </tr>
+            <tr class="tb">
+                <td class="tb">
+                    <input type="radio"
+                           name="hlp"
+                           id="hlp0"
+                           value="0"
+                           th:checked="${initData.helP == '0'}"/>
+                    <label for="hlp0">
+                        в новой вкладке/окне
+                    </label>
+                </td>
+            </tr>
+        </table>
+
+        <button type="button" onclick="tuneSave()">Применить</button>
+    </div>
+</div>
+
+<div id="resB" class="divb"></div>
+<div id="any" class="div"></div>
+<textarea id="codT" class="hid"></textarea>
+<iframe id="iFr" class="hid"></iframe>
+<div id="viewT" class="hid" style="font-size:large;color:brown"></div>
+<div id="dJob" class="hid" asUser="">
+    <table id="tJob" style="background-color:lightcyan">
+        <tr>
+            <td></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
